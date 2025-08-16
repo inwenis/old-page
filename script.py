@@ -9,13 +9,17 @@ WelcomeToMyPage = """
     </center>
 </td>"""
 
-f = open("index.html")
-content = f.read()
-f.close()
-content = content.replace("{{WelcomeToMyPage}}", WelcomeToMyPage)
+files = [x for x in os.listdir() if x.endswith('.html')]
 
-f = open("out/index.html", "w")
-f.write(content)
-f.close()
+for x in files:
+    source = open(x)
+    dest = open(f"out/{x}", "w")
+
+    content = source.read()
+    content = content.replace("{{WelcomeToMyPage}}", WelcomeToMyPage)
+    dest.write(content)
+
+    source.close()
+    dest.close()
 
 os.startfile(".\\out\\index.html")
