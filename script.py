@@ -15,7 +15,7 @@ NavigationBar = """
     <ul>
         <li><a href="./index.html">Home</a></li>
         <li><a href="./image.html">Cool Image</a></li>
-        <li><a href="./page2.html">Item 2</a></li>
+        <li><a href="./script.html">Script</a></li>
         <li><a href="./about.html">About</a></li>
     </ul>
 </td>
