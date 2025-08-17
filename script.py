@@ -74,12 +74,13 @@ FooterRow = """
 </tr>
 """
 
-files = [x for x in os.listdir() if x.endswith('.html')]
+files_html = [x for x in os.listdir() if x.endswith('.html')]
+files_img = [x for x in os.listdir() if x.endswith('.jpg') or x.endswith('.png')]
 
 shutil.rmtree('out', ignore_errors=True)
 os.makedirs('out')
 
-for x in files:
+for x in files_html:
     source = open(x)
     dest = open(f"out/{x}", "w")
 
@@ -89,6 +90,16 @@ for x in files:
         .replace("{{NavigationBar}}", NavigationBar)\
         .replace("{{MainContent}}", MainContent)\
         .replace("{{FooterRow}}", FooterRow)
+    dest.write(content)
+
+    source.close()
+    dest.close()
+
+for x in files_img:
+    source = open(x, "rb")
+    dest = open(f"out/{x}", "wb")
+
+    content = source.read()
     dest.write(content)
 
     source.close()
