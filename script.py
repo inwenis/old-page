@@ -1,5 +1,6 @@
 import os
 import shutil
+import sys
 
 
 WelcomeToMyPage = """
@@ -79,4 +80,7 @@ for x in files:
     source.close()
     dest.close()
 
-os.startfile(".\\out\\index.html")
+if len(sys.argv) > 1:
+    os.startfile(f".\\out\\{sys.argv[1]}")
+else:
+    os.startfile(".\\out\\index.html")
