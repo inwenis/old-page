@@ -9,6 +9,16 @@ WelcomeToMyPage = """
     </center>
 </td>"""
 
+NavigationBar = """
+<td>
+    <ul>
+        <li><a href="./page1.html">Item 1</a></li>
+        <li><a href="./page2.html">Item 2</a></li>
+        <li><a href="./page3.html">Item 3</a></li>
+    </ul>
+</td>
+"""
+
 files = [x for x in os.listdir() if x.endswith('.html')]
 
 for x in files:
@@ -16,7 +26,7 @@ for x in files:
     dest = open(f"out/{x}", "w")
 
     content = source.read()
-    content = content.replace("{{WelcomeToMyPage}}", WelcomeToMyPage)
+    content = content.replace("{{WelcomeToMyPage}}", WelcomeToMyPage).replace("{{NavigationBar}}", NavigationBar)
     dest.write(content)
 
     source.close()
