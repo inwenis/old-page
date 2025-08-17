@@ -11,7 +11,7 @@ WelcomeToMyPage = """
 </td>"""
 
 NavigationBar = """
-<td>
+<td style="width: 200px;" valign=top>
     <ul>
         <li><a href="./index.html">Home</a></li>
         <li><a href="./image.html">Cool Image</a></li>
