@@ -22,3 +22,4 @@ for f in build_result_files:
 subprocess.run(["git", "add", "."])
 subprocess.run(["git", "commit", "-m", "Deploy updated site"])
 subprocess.run(["git", "push", "origin", "gh-pages"])
+subprocess.run(["git", "checkout", "-"]) # back to previous branch
