@@ -8,9 +8,10 @@ def has_hidden_attribute(filepath) -> bool: # type: ignore
 
 subprocess.run(["python", "script.py", "build"])
 subprocess.run(["git", "checkout", "gh-pages"])
-all = os.listdir(".")
-all_but_out = [f for f in all if f != "out"]
-for f in all_but_out:
+to_remove = os.listdir(".")
+to_remove = [f for f in to_remove if f != "out"] # do not remove out because the files to be deplyed are there
+to_remove = [f for f in to_remove if f != ".vscode"] # do not remove .vscode as it's locked by vs code
+for f in to_remove:
     if not has_hidden_attribute(f):
         os.remove(f)
 
