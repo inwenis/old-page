@@ -61,6 +61,17 @@ MainContent = """
   </p>
 """
 
+FooterRow = """
+<tr>
+    <td align="center">
+        <p>This page was opened this many times:</p>
+        <div id="sfceb68whh3ctbxa37pt1wddn2uw45g9r6b"></div><script type="text/javascript" src="https://counter1.optistats.ovh/private/counter.js?c=eb68whh3ctbxa37pt1wddn2uw45g9r6b&down=async" async></script><noscript><a href="https://www.freecounterstat.com" title="hit counters"><img src="https://counter1.optistats.ovh/private/freecounterstat.php?c=eb68whh3ctbxa37pt1wddn2uw45g9r6b" border="0" title="hit counters" alt="hit counters"></a></noscript>
+        <p>Visited by</p>
+        <div id="sfcjx992yb7w9wzfqngmb7eflw46u4rh757"></div><script type="text/javascript" src="https://counter1.optistats.ovh/private/counter.js?c=jx992yb7w9wzfqngmb7eflw46u4rh757&down=async" async></script><noscript><a href="https://www.freecounterstat.com" title="hit counter"><img src="https://counter1.optistats.ovh/private/freecounterstat.php?c=jx992yb7w9wzfqngmb7eflw46u4rh757" border="0" title="hit counter" alt="hit counter"></a></noscript>
+    </td>
+</tr>
+"""
+
 files = [x for x in os.listdir() if x.endswith('.html')]
 
 shutil.rmtree('out', ignore_errors=True)
@@ -74,7 +85,8 @@ for x in files:
     content = content\
         .replace("{{WelcomeToMyPage}}", WelcomeToMyPage)\
         .replace("{{NavigationBar}}", NavigationBar)\
-        .replace("{{MainContent}}", MainContent)
+        .replace("{{MainContent}}", MainContent)\
+        .replace("{{FooterRow}}", FooterRow)
     dest.write(content)
 
     source.close()
