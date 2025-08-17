@@ -1,5 +1,5 @@
-
 import os
+import shutil
 
 
 WelcomeToMyPage = """
@@ -60,6 +60,9 @@ MainContent = """
 """
 
 files = [x for x in os.listdir() if x.endswith('.html')]
+
+shutil.rmtree('out', ignore_errors=True)
+os.makedirs('out')
 
 for x in files:
     source = open(x)
