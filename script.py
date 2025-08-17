@@ -81,6 +81,9 @@ for x in files:
     dest.close()
 
 if len(sys.argv) > 1:
-    os.startfile(f".\\out\\{sys.argv[1]}")
+    if sys.argv[1] == "build":
+        pass
+    else:
+        os.startfile(f".\\out\\{sys.argv[1]}")
 else:
     os.startfile(".\\out\\index.html")
