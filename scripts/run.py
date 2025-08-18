@@ -3,6 +3,16 @@ import shutil
 import sys
 
 
+def read_all_text(file_path):
+    with open(file_path, "r") as file:
+        return file.read()
+
+
+def write_text(file_path, content):
+    with open(file_path, "w") as file:
+        file.write(content)
+
+
 WelcomeToMyPage = """
 <td style="background-color: aqua;">
     <center>
@@ -74,26 +84,21 @@ FooterRow = """
 </tr>
 """
 
-files_html = [x for x in os.listdir("src") if x.endswith('.html')]
-files_img  = [x for x in os.listdir("images") if x.endswith('.jpg') or x.endswith('.png')]
+files_html = [x for x in os.listdir("src") if x.endswith(".html")]
+files_img = [x for x in os.listdir("images") if x.endswith(".jpg")]
 
-shutil.rmtree('out', ignore_errors=True)
-os.makedirs('out')
+shutil.rmtree("out", ignore_errors=True)
+os.makedirs("out")
 
 for x in files_html:
-    src = open(f"src/{x}")
-    dst = open(f"out/{x}", "w")
-
-    content = src.read()
-    content = content\
-        .replace("{{WelcomeToMyPage}}", WelcomeToMyPage)\
-        .replace("{{NavigationBar}}", NavigationBar)\
-        .replace("{{MainContent}}", MainContent)\
+    content = read_all_text(f"src/{x}")
+    content = (
+        content.replace("{{WelcomeToMyPage}}", WelcomeToMyPage)
+        .replace("{{NavigationBar}}", NavigationBar)
+        .replace("{{MainContent}}", MainContent)
         .replace("{{FooterRow}}", FooterRow)
-    dst.write(content)
-
-    src.close()
-    dst.close()
+    )
+    write_text(f"out/{x}", content)
 
 for x in files_img:
     src = open(f"images/{x}", "rb")
