@@ -1,0 +1,90 @@
+<html>
+
+<head>
+    <title>My Web Page about Mandelbrot - page 1</title>
+</head>
+
+<body>
+
+    <table style="width:800px" align="center">
+        <tr>
+            {{WelcomeToMyPage}}
+        </tr>
+        <tr>
+            <!-- body -->
+            <td>
+                <table>
+                    <tr>
+                        {{NavigationBar}}
+                        <!-- main content-->
+                        <td>
+                            <pre id="mandelbrot"></pre>
+
+<script>
+const pre = document.getElementById("mandelbrot");
+
+const chars = " .:-=+*#%@"; // From low to high density
+const width = 80;
+const height = 40;
+
+let centerX = -0.743643887037151;  // Deep interesting location
+let centerY = 0.13182590420533;
+let zoom = 1; // Start zoom level
+
+function computeMandelbrot(x, y, maxIter = 50) {
+    let zx = 0, zy = 0;
+    let iter = 0;
+
+    while (zx * zx + zy * zy < 4 && iter < maxIter) {
+    const xtemp = zx * zx - zy * zy + x;
+    zy = 2 * zx * zy + y;
+    zx = xtemp;
+    iter++;
+    }
+
+    return iter;
+}
+
+function renderFrame() {
+    const aspect = width / height;
+    const scale = 1 / zoom;
+    const dx = scale * 3.5 / width;
+    const dy = scale * 2.0 / height;
+
+    let output = "";
+
+    for (let py = 0; py < height; py++) {
+    const y = centerY + (py - height / 2) * dy;
+
+    for (let px = 0; px < width; px++) {
+        const x = centerX + (px - width / 2) * dx;
+
+        const iter = computeMandelbrot(x, y);
+        const charIndex = Math.floor(iter / 50 * (chars.length - 1));
+        output += chars[charIndex];
+    }
+
+    output += "\n";
+    }
+
+    pre.textContent = output;
+
+    // Zoom and pan
+    zoom *= 1.015;
+    centerX += 0.00005 * scale; // Slight pan for more dynamic zoom path
+
+    requestAnimationFrame(renderFrame);
+}
+
+renderFrame();
+</script>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        {{FooterRow}}
+    </table>
+</body>
+
+</html>
