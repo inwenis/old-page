@@ -20,6 +20,6 @@ for f in build_result_files:
     os.rename(f"out/{f}", f"./{f}")
 
 subprocess.run(["git", "add", "."])
-subprocess.run(["git", "commit", "-m", "Deploy updated site"])
+subprocess.run(["git", "commit", "-m", "Deploy updated site", "--allow-empty"])
 subprocess.run(["git", "push", "origin", "gh-pages"])
 subprocess.run(["git", "checkout", "-"]) # back to previous branch
