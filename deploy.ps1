@@ -1,1 +1,1 @@
-python deploy.py
+python scripts/deploy.py
