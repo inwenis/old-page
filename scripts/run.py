@@ -1,16 +1,7 @@
 import os
 import shutil
 import sys
-
-
-def read_all_text(file_path):
-    with open(file_path, "r") as file:
-        return file.read()
-
-
-def write_text(file_path, content):
-    with open(file_path, "w") as file:
-        file.write(content)
+from pathlib import Path
 
 
 WelcomeToMyPage = """
@@ -91,24 +82,21 @@ shutil.rmtree("out", ignore_errors=True)
 os.makedirs("out")
 
 for x in files_html:
-    content = read_all_text(f"src/{x}")
+    content = Path(f"src/{x}").read_text()
     content = (
         content.replace("{{WelcomeToMyPage}}", WelcomeToMyPage)
         .replace("{{NavigationBar}}", NavigationBar)
         .replace("{{MainContent}}", MainContent)
         .replace("{{FooterRow}}", FooterRow)
     )
-    write_text(f"out/{x}", content)
+    Path(f"out/{x}").write_text(content)
 
 for x in files_img:
-    src = open(f"images/{x}", "rb")
-    dst = open(f"out/{x}", "wb")
+    src = Path(f"images/{x}")
+    dst = Path(f"out/{x}")
 
-    content = src.read()
-    dst.write(content)
-
-    src.close()
-    dst.close()
+    content = src.read_bytes()
+    dst.write_bytes(content)
 
 if len(sys.argv) > 1:
     if sys.argv[1] == "build":
