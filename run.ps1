@@ -1,1 +1,1 @@
-python script.py $args
+python ./scripts/run.py $args
