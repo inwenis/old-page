@@ -74,41 +74,41 @@ FooterRow = """
 </tr>
 """
 
-files_html = [x for x in os.listdir() if x.endswith('.html')]
-files_img = [x for x in os.listdir() if x.endswith('.jpg') or x.endswith('.png')]
+files_html = [x for x in os.listdir("src") if x.endswith('.html')]
+files_img  = [x for x in os.listdir("images") if x.endswith('.jpg') or x.endswith('.png')]
 
-shutil.rmtree('out', ignore_errors=True)
-os.makedirs('out')
+shutil.rmtree('../out', ignore_errors=True)
+os.makedirs('../out')
 
 for x in files_html:
-    source = open(x)
-    dest = open(f"out/{x}", "w")
+    src = open(x)
+    dst = open(f"../out/{x}", "w")
 
-    content = source.read()
+    content = src.read()
     content = content\
         .replace("{{WelcomeToMyPage}}", WelcomeToMyPage)\
         .replace("{{NavigationBar}}", NavigationBar)\
         .replace("{{MainContent}}", MainContent)\
         .replace("{{FooterRow}}", FooterRow)
-    dest.write(content)
+    dst.write(content)
 
-    source.close()
-    dest.close()
+    src.close()
+    dst.close()
 
 for x in files_img:
-    source = open(x, "rb")
-    dest = open(f"out/{x}", "wb")
+    src = open(f"images/{x}", "rb")
+    dst = open(f"../out/{x}", "wb")
 
-    content = source.read()
-    dest.write(content)
+    content = src.read()
+    dst.write(content)
 
-    source.close()
-    dest.close()
+    src.close()
+    dst.close()
 
 if len(sys.argv) > 1:
     if sys.argv[1] == "build":
         pass
     else:
-        os.startfile(f".\\out\\{sys.argv[1]}")
+        os.startfile(f"out\\{sys.argv[1]}")
 else:
-    os.startfile(".\\out\\index.html")
+    os.startfile("out\\index.html")
