@@ -77,12 +77,12 @@ FooterRow = """
 files_html = [x for x in os.listdir("src") if x.endswith('.html')]
 files_img  = [x for x in os.listdir("images") if x.endswith('.jpg') or x.endswith('.png')]
 
-shutil.rmtree('../out', ignore_errors=True)
-os.makedirs('../out')
+shutil.rmtree('out', ignore_errors=True)
+os.makedirs('out')
 
 for x in files_html:
-    src = open(x)
-    dst = open(f"../out/{x}", "w")
+    src = open(f"src/{x}")
+    dst = open(f"out/{x}", "w")
 
     content = src.read()
     content = content\
@@ -97,7 +97,7 @@ for x in files_html:
 
 for x in files_img:
     src = open(f"images/{x}", "rb")
-    dst = open(f"../out/{x}", "wb")
+    dst = open(f"out/{x}", "wb")
 
     content = src.read()
     dst.write(content)
